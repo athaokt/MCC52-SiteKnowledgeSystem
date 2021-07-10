@@ -1,4 +1,5 @@
 using MCC52_SiteKnowledgeSystem.Context;
+using MCC52_SiteKnowledgeSystem.Repositories.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,17 @@ namespace MCC52_SiteKnowledgeSystem
         {
             services.AddControllers();
             services.AddDbContext<MyContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("APIContext")));
+
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<AccountRoleRepository>();
+            services.AddScoped<CategoryRepository>();
+            services.AddScoped<ContentRepository>();
+            services.AddScoped<EmployeeRepository>();
+            services.AddScoped<MessageRepository>();
+            services.AddScoped<RequestFormRepository>();
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<SiteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

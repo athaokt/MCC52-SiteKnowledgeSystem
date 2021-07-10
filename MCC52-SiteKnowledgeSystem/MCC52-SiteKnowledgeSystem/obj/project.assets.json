@@ -7444,19 +7444,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\Alfius\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SKS-API.csproj",
+      "projectUniqueName": "C:\\Users\\Alfius\\Documents\\GitHub\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SKS-API.csproj",
       "projectName": "MCC52-SKS-API",
-      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SKS-API.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\obj\\",
+      "projectPath": "C:\\Users\\Alfius\\Documents\\GitHub\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SKS-API.csproj",
+      "packagesPath": "C:\\Users\\Alfius\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Alfius\\Documents\\GitHub\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\MCC52-SiteKnowledgeSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Alfius\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7464,7 +7464,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://packagesource": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
@@ -7519,7 +7520,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
