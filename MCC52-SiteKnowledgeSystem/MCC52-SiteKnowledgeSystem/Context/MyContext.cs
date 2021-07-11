@@ -30,11 +30,16 @@ namespace MCC52_SiteKnowledgeSystem.Context
                 .WithOne(e => e.Employee)
                 .HasForeignKey<Account>(e => e.EmployeeId);
 
-            modelBuilder.Entity<Role>()
-                .HasMany(x => x.Accounts)
-                .WithMany(p => p.Roles)
-                .UsingEntity<AccountRole>(a => a.HasOne(w => w.Account)
-                .WithMany().HasForeignKey(s => s.EmployeeId), s => s.HasOne(l => l.Role).WithMany().HasForeignKey(s => s.RoleId));
+            modelBuilder.Entity<AccountRole>()
+                .HasKey(ac => new { ac.EmployeeId, ac.RoleId });
+            modelBuilder.Entity<AccountRole>()
+                .HasOne(a => a.Account)
+                .WithMany(ac => ac.AccountRoles)
+                .HasForeignKey(a => a.EmployeeId);
+            modelBuilder.Entity<AccountRole>()
+                .HasOne(r => r.Role)
+                .WithMany(ac => ac.AccountRoles)
+                .HasForeignKey(r => r.RoleId);
 
             modelBuilder.Entity<Category>()
                 .HasMany(a => a.Contents)

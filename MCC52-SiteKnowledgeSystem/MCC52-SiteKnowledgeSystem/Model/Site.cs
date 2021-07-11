@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,6 +16,7 @@ namespace MCC52_SiteKnowledgeSystem.Model
         public string SiteName { get; set; }
         public string Address { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }

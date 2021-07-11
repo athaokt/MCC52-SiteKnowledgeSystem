@@ -2,7 +2,7 @@
 
 namespace MCC52_SiteKnowledgeSystem.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -146,7 +146,7 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tb_t_AccountRoles", x => x.EmployeeId);
+                    table.PrimaryKey("PK_tb_t_AccountRoles", x => new { x.EmployeeId, x.RoleId });
                     table.ForeignKey(
                         name: "FK_tb_t_AccountRoles_tb_m_Roles_RoleId",
                         column: x => x.RoleId,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +14,7 @@ namespace MCC52_SiteKnowledgeSystem.Model
         [Key]
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-
-        public virtual ICollection<Account> Accounts { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<AccountRole> AccountRoles { get; set; }
     }
 }

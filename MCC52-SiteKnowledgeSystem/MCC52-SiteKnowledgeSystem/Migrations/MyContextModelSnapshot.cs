@@ -42,7 +42,7 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.HasKey("EmployeeId");
+                    b.HasKey("EmployeeId", "RoleId");
 
                     b.HasIndex("RoleId");
 
@@ -217,13 +217,13 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
             modelBuilder.Entity("MCC52_SiteKnowledgeSystem.Model.AccountRole", b =>
                 {
                     b.HasOne("MCC52_SiteKnowledgeSystem.Model.Account", "Account")
-                        .WithMany()
+                        .WithMany("AccountRoles")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MCC52_SiteKnowledgeSystem.Model.Role", "Role")
-                        .WithMany()
+                        .WithMany("AccountRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -287,6 +287,11 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("MCC52_SiteKnowledgeSystem.Model.Account", b =>
+                {
+                    b.Navigation("AccountRoles");
+                });
+
             modelBuilder.Entity("MCC52_SiteKnowledgeSystem.Model.Category", b =>
                 {
                     b.Navigation("Contents");
@@ -306,6 +311,11 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
                     b.Navigation("Messages");
 
                     b.Navigation("RequestForms");
+                });
+
+            modelBuilder.Entity("MCC52_SiteKnowledgeSystem.Model.Role", b =>
+                {
+                    b.Navigation("AccountRoles");
                 });
 
             modelBuilder.Entity("MCC52_SiteKnowledgeSystem.Model.Site", b =>

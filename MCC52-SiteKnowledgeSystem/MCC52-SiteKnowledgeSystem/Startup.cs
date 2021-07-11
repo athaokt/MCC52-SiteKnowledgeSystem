@@ -30,6 +30,9 @@ namespace MCC52_SiteKnowledgeSystem
         {
             services.AddControllers();
             services.AddDbContext<MyContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("APIContext")));
+            //services.AddControllersWithViews()
+            //    .AddNewtonsoftJson(options =>
+            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddScoped<AccountRepository>();
             services.AddScoped<AccountRepository>();
