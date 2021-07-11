@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MCC52_SiteKnowledgeSystem.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class SitesController : BaseController<Site, SiteRepository, int>
     {
         public SitesController(SiteRepository siteRepository) : base(siteRepository)

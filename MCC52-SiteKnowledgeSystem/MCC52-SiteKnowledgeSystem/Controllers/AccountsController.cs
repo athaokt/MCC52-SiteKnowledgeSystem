@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace MCC52_SiteKnowledgeSystem.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class AccountController : BaseController<Account, AccountRepository, string>
+    [Route("api/[controller]")]
+    public class AccountsController : BaseController<Account, AccountRepository, string>
     {
-        public AccountController(AccountRepository accountRepository) : base(accountRepository)
+        public AccountsController(AccountRepository accountRepository) : base(accountRepository)
         {
 
         }

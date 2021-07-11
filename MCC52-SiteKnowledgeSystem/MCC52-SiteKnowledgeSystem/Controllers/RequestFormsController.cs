@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MCC52_SiteKnowledgeSystem.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class RequestFormsController : BaseController<RequestForm, RequestFormRepository, int>
     {
         public RequestFormsController(RequestFormRepository requestFormRepository) : base(requestFormRepository)

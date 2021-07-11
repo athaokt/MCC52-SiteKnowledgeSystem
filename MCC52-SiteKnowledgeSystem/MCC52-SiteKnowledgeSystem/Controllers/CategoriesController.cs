@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MCC52_SiteKnowledgeSystem.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CategoriesController : BaseController<Category, CategoryRepository, int>
     {
         public CategoriesController(CategoryRepository categoryRepository) : base(categoryRepository)
