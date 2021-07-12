@@ -2,6 +2,7 @@
 using MCC52_SiteKnowledgeSystem.Context;
 using MCC52_SiteKnowledgeSystem.Model;
 using MCC52_SiteKnowledgeSystem.Repositories.Data;
+using MCC52_SiteKnowledgeSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -36,6 +37,25 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
             else
             {
                 return BadRequest(new { status = HttpStatusCode.BadRequest, result = get, message = "Failed" });
+            }
+        }
+        [HttpPost("Login")]
+        public ActionResult Login(LoginVM loginVM)
+        {
+            var login = accountRepository.Login(loginVM);
+
+            if (login == 2)
+            {
+
+                return Ok(new { status = HttpStatusCode.OK, result = login, message = "Berhasil Login" });
+            }
+            else if (login == 1)
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = login, message = "Password Salah" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = login, message = "Username / Password tidak sesuai yang ada di database" });
             }
         }
     }

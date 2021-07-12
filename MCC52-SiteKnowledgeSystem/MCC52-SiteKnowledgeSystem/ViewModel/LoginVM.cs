@@ -8,7 +8,7 @@ namespace MCC52_SiteKnowledgeSystem.ViewModel
     public class LoginVM
     {
         public string Email { get; set; }
-        public string NIK { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
     }
 }

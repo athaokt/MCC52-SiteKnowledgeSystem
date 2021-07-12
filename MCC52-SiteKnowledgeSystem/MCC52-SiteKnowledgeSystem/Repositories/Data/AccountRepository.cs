@@ -1,5 +1,6 @@
 ﻿using MCC52_SiteKnowledgeSystem.Context;
 using MCC52_SiteKnowledgeSystem.Model;
+using MCC52_SiteKnowledgeSystem.ViewModel;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -63,9 +64,37 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
             return employeeRecord;
         }
 
-        public static string GetRandomSalt()
+        public int Login(LoginVM loginVM)
         {
-            return BCrypt.Net.BCrypt.GenerateSalt(12);
+            var login = (from e in myContext.Employees
+                         join a in myContext.Accounts on e.EmployeeId equals a.EmployeeId
+                         select new
+                         {
+                             e.Email,
+                             a.Username
+                         }
+
+                         );
+            var cekEmail = myContext.Employees.Where(e => (e.Email == loginVM.Email) ).FirstOrDefault<Employee>();
+            var cekUsername = myContext.Accounts.Where(a => (a.Username == loginVM.Username)).FirstOrDefault<Account>();
+            if (cekEmail != null)
+            {
+                var cekPass = BCrypt.Net.BCrypt.Verify(loginVM.Password, cekEmail.Account.Password);
+                if (cekPass)
+                {
+
+                    return 2;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
         }
+
     }
 }

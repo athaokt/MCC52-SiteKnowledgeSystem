@@ -43,7 +43,7 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
 
                     account.EmployeeId = employee.EmployeeId;
                     account.Username = registerVM.Username;
-                    account.Password = registerVM.Password;
+                    account.Password = password;
                     myContext.Accounts.Add(account);
                     myContext.SaveChanges();
 
