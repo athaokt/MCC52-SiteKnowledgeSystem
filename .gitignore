@@ -1,2 +1,5 @@
 appsetting.json
 Migrations/
+*.dll
+*.pdb
+
