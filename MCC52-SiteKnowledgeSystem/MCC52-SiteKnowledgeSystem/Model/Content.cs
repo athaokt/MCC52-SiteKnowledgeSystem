@@ -11,10 +11,29 @@ namespace MCC52_SiteKnowledgeSystem.Model
     [Table("tb_t_Contents")]
     public class Content
     {
+        //public Content()
+        //{
+        //    ContentDate = DateTime.Now;
+        //}
+
+        private DateTime? contentDate = System.DateTime.Now;
+
         [Key]
         public int ContentId { get; set; }
         public string ContentTitle { get; set; }
         public string ContentText { get; set; }
+        //public DateTime? ContentDate { get; set; }
+        public DateTime ContentDate
+        {
+            get
+            {
+                return this.contentDate.HasValue
+                   ? this.contentDate.Value
+                   : DateTime.Now;
+            }
+
+            set { this.contentDate = value; }
+        }
         public int ViewCounter { get; set; }
         public string EmployeeId { get; set; }
         public int CategoryId { get; set; }
