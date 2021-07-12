@@ -154,10 +154,7 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmployeeId1")
+                    b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Message")
@@ -165,7 +162,7 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
 
                     b.HasKey("RequestId");
 
-                    b.HasIndex("EmployeeId1");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("tb_t_RequestForms");
                 });
@@ -282,7 +279,7 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
                 {
                     b.HasOne("MCC52_SiteKnowledgeSystem.Model.Employee", "Employee")
                         .WithMany("RequestForms")
-                        .HasForeignKey("EmployeeId1");
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Employee");
                 });

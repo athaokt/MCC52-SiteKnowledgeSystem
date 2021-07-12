@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -30,10 +31,8 @@ namespace MCC52_SiteKnowledgeSystem
         {
             services.AddControllers();
             services.AddDbContext<MyContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("APIContext")));
-            //services.AddControllersWithViews()
-            //    .AddNewtonsoftJson(options =>
-            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddScoped<AccountRepository>();
             services.AddScoped<AccountRepository>();
             services.AddScoped<AccountRoleRepository>();

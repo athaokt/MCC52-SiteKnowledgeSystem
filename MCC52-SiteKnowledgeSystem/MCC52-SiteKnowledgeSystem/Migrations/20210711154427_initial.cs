@@ -123,15 +123,14 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
                     RequestId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_t_RequestForms", x => x.RequestId);
                     table.ForeignKey(
-                        name: "FK_tb_t_RequestForms_tb_t_Employees_EmployeeId1",
-                        column: x => x.EmployeeId1,
+                        name: "FK_tb_t_RequestForms_tb_t_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "tb_t_Employees",
                         principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Restrict);
@@ -219,9 +218,9 @@ namespace MCC52_SiteKnowledgeSystem.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_t_RequestForms_EmployeeId1",
+                name: "IX_tb_t_RequestForms_EmployeeId",
                 table: "tb_t_RequestForms",
-                column: "EmployeeId1");
+                column: "EmployeeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

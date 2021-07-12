@@ -73,6 +73,8 @@ C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSy
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\MCC52-SKS-API.pdb
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Humanizer.dll
+C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -96,6 +98,7 @@ C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSy
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
 C:\Users\Alfius\Documents\GitHub\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\MCC52-SiteKnowledgeSystem\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll

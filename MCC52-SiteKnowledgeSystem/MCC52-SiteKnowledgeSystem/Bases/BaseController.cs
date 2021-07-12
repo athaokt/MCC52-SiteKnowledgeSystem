@@ -86,7 +86,7 @@ namespace MCC52_SiteKnowledgeSystem.Bases
             var response = repository.Update(e, key);
             if (key == null)
             {
-                var get = NotFound(new { status = HttpStatusCode.NotFound, result = response, message = "Not Found" });
+                var get = Ok(new { status = HttpStatusCode.OK, result = response, message = "Not Found" });
                 return get;
             }
             else
@@ -98,7 +98,7 @@ namespace MCC52_SiteKnowledgeSystem.Bases
                 }
                 else
                 {
-                    var get = NotFound(new { status = HttpStatusCode.NotFound, result = response, message = "Not Success" });
+                    var get = Ok(new { status = HttpStatusCode.OK, result = response, message = "Not Success" });
                     return get;
                 }
             }
