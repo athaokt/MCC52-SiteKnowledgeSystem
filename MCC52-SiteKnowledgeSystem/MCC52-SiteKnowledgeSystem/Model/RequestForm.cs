@@ -11,6 +11,9 @@ namespace MCC52_SiteKnowledgeSystem.Model
     [Table("tb_t_RequestForms")]
     public class RequestForm
     {
+
+
+
         private DateTime? requestDate = System.DateTime.Now;
 
         [Key]

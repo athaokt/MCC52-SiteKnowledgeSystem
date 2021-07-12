@@ -16,6 +16,7 @@ namespace MCC52_SiteKnowledgeSystem.Model
         //    ContentDate = DateTime.Now;
         //}
 
+
         private DateTime? contentDate = System.DateTime.Now;
 
         [Key]

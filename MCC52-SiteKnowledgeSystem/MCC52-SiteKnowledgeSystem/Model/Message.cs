@@ -12,6 +12,7 @@ namespace MCC52_SiteKnowledgeSystem.Model
     public class Message
     {
 
+
         private DateTime? messageDate = System.DateTime.Now;
 
         [Key]
