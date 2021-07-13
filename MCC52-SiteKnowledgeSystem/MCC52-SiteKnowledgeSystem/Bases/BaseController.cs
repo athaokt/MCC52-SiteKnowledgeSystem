@@ -59,7 +59,7 @@ namespace MCC52_SiteKnowledgeSystem.Bases
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{key}")]
         public ActionResult Delete(Key key)
         {
             var response = repository.Delete(key);
@@ -80,7 +80,7 @@ namespace MCC52_SiteKnowledgeSystem.Bases
             }
         }
 
-        [HttpPut]
+        [HttpPut("{key}")]
         public ActionResult Update(Entity e, Key key)
         {
             var response = repository.Update(e, key);

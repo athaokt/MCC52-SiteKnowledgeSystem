@@ -3,6 +3,7 @@ using MCC52_SiteKnowledgeSystem.Context;
 using MCC52_SiteKnowledgeSystem.Model;
 using MCC52_SiteKnowledgeSystem.Repositories.Data;
 using MCC52_SiteKnowledgeSystem.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace MCC52_SiteKnowledgeSystem.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AccountsController : BaseController<Account, AccountRepository, string>
@@ -39,6 +41,7 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
                 return BadRequest(new { status = HttpStatusCode.BadRequest, result = get, message = "Failed" });
             }
         }
+        [AllowAnonymous]
         [HttpPost("Login")]
         public ActionResult Login(LoginVM loginVM)
         {
@@ -46,8 +49,9 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
 
             if (login == 2)
             {
-
-                return Ok(new { status = HttpStatusCode.OK, result = login, message = "Berhasil Login" });
+                var pos = Ok(new JWTokenVM { Status = HttpStatusCode.OK, Token = accountRepository.GenerateTokenLogin(loginVM), Message = "Berhasil Login" });
+                return pos;
+                //return Ok(new { status = HttpStatusCode.OK, result = login, message = "Berhasil Login" });
             }
             else if (login == 1)
             {
@@ -58,6 +62,7 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
                 return BadRequest(new { status = HttpStatusCode.BadRequest, result = login, message = "Username / Password tidak sesuai yang ada di database" });
             }
         }
+        [AllowAnonymous]
         [HttpPost("ResetPassword")]
         public ActionResult ResetPassword(ResetPasswordVM resetPasswordVM)
         {
@@ -71,6 +76,7 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
                 return BadRequest(new { status = HttpStatusCode.OK, result = reset, message = "Gagal mengirim email" });
             }
         }
+        [AllowAnonymous]
         [HttpPost("ChangePassword")]
         public ActionResult ChangePassword(ChangePasswordVM changePasswordVM)
         {

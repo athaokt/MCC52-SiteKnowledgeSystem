@@ -2,10 +2,14 @@
 using MCC52_SiteKnowledgeSystem.Model;
 using MCC52_SiteKnowledgeSystem.ViewModel;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MCC52_SiteKnowledgeSystem.Repositories.Data
@@ -157,6 +161,37 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
                 return 0;
             }
         }
+
+        public string GenerateTokenLogin(LoginVM loginVM)
+        {
+            var data = (
+                from account in myContext.Accounts
+                join employee in myContext.Employees
+                on account.EmployeeId equals employee.EmployeeId
+                join accountRole in myContext.AccountRoles
+                on account.EmployeeId equals accountRole.EmployeeId
+                join role in myContext.Roles
+                on accountRole.RoleId equals role.RoleId
+                where account.Username == $"{loginVM.Username}" || employee.Email == $"{loginVM.Email}"
+                select new
+                {
+                    Email = employee.Email,
+                    RoleName = role.RoleName
+                }).ToList();
+            var claims = new List<Claim>();
+            foreach (var item in data)
+            {
+                claims.Add(new Claim("email", item.Email));
+                claims.Add(new Claim("role", item.RoleName));
+            }
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"],
+                claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+            //return Ok(new { status = HttpStatusCode.OK, nik = user.NIK, token = show });
+        }
+
         public static string GetRandomSalt()
         {
             return BCrypt.Net.BCrypt.GenerateSalt(12);
