@@ -58,5 +58,31 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
                 return BadRequest(new { status = HttpStatusCode.BadRequest, result = login, message = "Username / Password tidak sesuai yang ada di database" });
             }
         }
+        [HttpPost("ResetPassword")]
+        public ActionResult ResetPassword(ResetPasswordVM resetPasswordVM)
+        {
+            var reset = accountRepository.ResetPassword(resetPasswordVM);
+            if (reset > 0)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = reset, message = "Email berhasil dikirim" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = reset, message = "Gagal mengirim email" });
+            }
+        }
+        [HttpPost("ChangePassword")]
+        public ActionResult ChangePassword(ChangePasswordVM changePasswordVM)
+        {
+            var reset = accountRepository.ChangePassword(changePasswordVM);
+            if (reset > 0)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = reset, message = "Berhasil Ganti Password" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = reset, message = "Gagal Ganti Password" });
+            }
+        }
     }
 }

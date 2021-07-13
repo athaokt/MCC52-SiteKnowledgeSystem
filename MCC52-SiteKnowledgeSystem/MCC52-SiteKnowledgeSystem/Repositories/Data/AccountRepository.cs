@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace MCC52_SiteKnowledgeSystem.Repositories.Data
@@ -94,6 +95,71 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
             {
                 return 0;
             }
+        }
+
+        public int ResetPassword(ResetPasswordVM resetPasswordVM)
+        {
+            var cek = myContext.Employees.Where(e => (e.Email == resetPasswordVM.Email)).FirstOrDefault<Employee>();
+            if (cek != null)
+            {
+                Guid g = Guid.NewGuid();
+                var getEmail = resetPasswordVM.Email;
+
+                DateTime dateTime = DateTime.Now;
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("oktigalasatha@gmail.com");
+                mail.To.Add(getEmail);
+                mail.Subject = $"Password Sementara {dateTime}";
+                mail.Body = $"Berikut adalah password sementara untuk melakukan reset password:\n{g.ToString()}";
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("oktigalasatha@gmail.com", "Atha.1998");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+
+                var find = myContext.Employees.Where(e => e.Email == getEmail).FirstOrDefault<Employee>();
+                var find2 = myContext.Accounts.Find(find.EmployeeId);
+
+                find2.Password = BCrypt.Net.BCrypt.HashPassword(g.ToString(), GetRandomSalt());
+
+                myContext.SaveChanges();
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+        public int ChangePassword(ChangePasswordVM changePasswordVM)
+        {
+            var cek = myContext.Employees.Where(e => (e.Email == changePasswordVM.Email)).FirstOrDefault<Employee>();
+            if (cek != null)
+            {
+                var cekPass = BCrypt.Net.BCrypt.Verify(changePasswordVM.OldPassword, cek.Account.Password);
+                if (cekPass)
+                {
+                    var change = myContext.Accounts.Find(cek.EmployeeId);
+                    change.Password = BCrypt.Net.BCrypt.HashPassword(changePasswordVM.NewPassword, GetRandomSalt());
+                    myContext.SaveChanges();
+                    return 2;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public static string GetRandomSalt()
+        {
+            return BCrypt.Net.BCrypt.GenerateSalt(12);
         }
 
     }

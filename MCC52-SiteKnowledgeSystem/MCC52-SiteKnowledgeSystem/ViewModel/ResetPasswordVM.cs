@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace MCC52_SiteKnowledgeSystem.ViewModel
 {
-    public class ResetPassword
+    public class ResetPasswordVM
     {
+        public string Email { get; set; }
     }
 }

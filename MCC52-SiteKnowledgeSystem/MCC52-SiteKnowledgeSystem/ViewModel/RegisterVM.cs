@@ -17,7 +17,6 @@ namespace MCC52_SiteKnowledgeSystem.ViewModel
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Degree { get; set; }
         public int SiteId { get; set; }
     }
 
