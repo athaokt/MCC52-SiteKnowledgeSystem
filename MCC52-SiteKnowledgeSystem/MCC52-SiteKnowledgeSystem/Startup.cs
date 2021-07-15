@@ -60,6 +60,10 @@ namespace MCC52_SiteKnowledgeSystem
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44393").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +81,10 @@ namespace MCC52_SiteKnowledgeSystem
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseCors(options => options.AllowAnyOrigin());
+
+            app.UseCors(options => options.WithOrigins("https://localhost:44393"));
 
             app.UseEndpoints(endpoints =>
             {
