@@ -2,27 +2,42 @@
     $('#contents').DataTable({
         
         'ajax': {
-            url: "https://localhost:44365/API/contents/getalldata",
+            url: "https://localhost:44365/API/accounts/getalldata",
             dataType: "json",
             dataSrc: ""
         },
 
         'columns': [
             {
-                "data": "categoryName"
+                "data": "employeeId"
             },
 
-            {
-                "data": "contentTitle"
-            },
-            {
-                "data": "contentDate"
-            },
-                        
             {
                 "data": "fullName"
             },
-
+            {
+                "data": "email"
+            },
+                        
+            {
+                "data": "username"
+            },
+            {
+                "data": null,
+                "render": function (data, type, row) {
+                    if (row["gender"] == 1) {
+                        return "Pria";
+                    } else {
+                        return "Wanita";
+                    }
+                }
+            },
+            {
+                "data": "siteName"
+            },
+            {
+                "data": "roleName"
+            },
         ]
     });
 });
