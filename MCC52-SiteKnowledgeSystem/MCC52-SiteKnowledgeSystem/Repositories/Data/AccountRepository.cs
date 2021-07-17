@@ -23,7 +23,7 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
             this._configuration = config;
             this.myContext = myContext;
         }
-        public IQueryable GetAll()
+        public IQueryable GetAllData()
         {
             var employeeRecord = (from e in myContext.Employees
                                   join s in myContext.Sites on e.SiteId equals s.SiteId
@@ -44,7 +44,7 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
             return employeeRecord;
         }
 
-        public IQueryable GetAll(string employeeId)
+        public IQueryable GetAllData(string employeeId)
         {
 
 

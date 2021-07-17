@@ -2,7 +2,7 @@
     $('#contents').DataTable({
         
         'ajax': {
-            url: "https://localhost:44365/API/accounts/getalldata",
+            url: "employee/viewregistered",
             dataType: "json",
             dataSrc: ""
         },
@@ -42,7 +42,6 @@
     });
 });
 
-
 $.ajax({
     url: "https://localhost:44365/API/categories"
 }).done((result) => {
@@ -54,8 +53,7 @@ $.ajax({
                                     <a href="#" class="nav-link">
                                         ${val.categoryName}                                        
                                     </a>
-                                </li>
-                                `
+                                </li>`
     });
     $("#categories").html(text);
 }).fail((error) => {

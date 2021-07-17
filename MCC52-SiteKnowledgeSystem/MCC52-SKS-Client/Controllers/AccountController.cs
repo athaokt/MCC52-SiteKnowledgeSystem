@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace MCC52_SKS_Client.Controllers
 {
-    public class EmployeeController : BaseController<Employee, EmployeeRepository, string>
+    public class AccountController : BaseController<Employee, EmployeeRepository, string>
     {
         private readonly EmployeeRepository repository;
-        public EmployeeController(EmployeeRepository repository) : base(repository)
+        public AccountController(EmployeeRepository repository) : base(repository)
         {
             this.repository = repository;
         }
@@ -26,12 +26,6 @@ namespace MCC52_SKS_Client.Controllers
         public async Task<JsonResult> ViewRegistered()
         {
             var result = await repository.ViewRegistered();
-            return Json(result);
-        }
-
-        public async Task<JsonResult> ViewDetail(string employeeId)
-        {
-            var result = await repository.ViewDetail(employeeId);
             return Json(result);
         }
     }

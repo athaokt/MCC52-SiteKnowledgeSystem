@@ -30,9 +30,9 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
             this.myContext = myContext;
         }
         [HttpGet("GetAllData")]
-        public ActionResult GetAll()
+        public ActionResult GetAllData()
         {
-            var get = accountRepository.GetAll();
+            var get = accountRepository.GetAllData();
 
             if (get != null)
             {
@@ -44,9 +44,9 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
             }
         }
         [HttpGet("GetAllData/{employeeId}")]
-        public ActionResult GetAll(string employeeId)
+        public ActionResult GetAllData(string employeeId)
         {
-            var get = accountRepository.GetAll(employeeId);
+            var get = accountRepository.GetAllData(employeeId);
 
             if (get != null)
             {

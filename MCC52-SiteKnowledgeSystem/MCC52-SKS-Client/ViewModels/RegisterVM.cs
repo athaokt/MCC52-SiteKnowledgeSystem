@@ -17,7 +17,8 @@ namespace MCC52_SKS_Client.ViewModels
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public int SiteId { get; set; }
+        public string SiteName { get; set; }
+        public string RoleName { get; set; }
     }
 
     public enum GenderType
