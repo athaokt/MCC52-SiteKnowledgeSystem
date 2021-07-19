@@ -34,6 +34,7 @@ namespace MCC52_SKS_Client.Controllers
             HttpContext.Session.SetString("JWToken", jwToken.Token);
             HttpContext.Session.SetString("fullName", repository.JwtName(jwToken.Token));
             HttpContext.Session.SetString("role", repository.JwtRole(jwToken.Token));
+            HttpContext.Session.SetString("employeeId", repository.JwtEmployeeId(jwToken.Token));
 
             var role = HttpContext.Session.GetString("role");
             if (role == "Admin")

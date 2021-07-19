@@ -14,8 +14,8 @@ using System.Net;
 using System.Threading.Tasks;
 
 namespace MCC52_SiteKnowledgeSystem.Controllers
-{/*
-    [Authorize]*/
+{
+    
     [ApiController]
     [Route("api/[controller]")]
     [EnableCors("AllowOrigin")]
@@ -104,6 +104,23 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
             else
             {
                 return BadRequest(new { status = HttpStatusCode.OK, result = reset, message = "Gagal Ganti Password" });
+            }
+        }
+        [HttpPost("Register")]
+        public ActionResult Register(RegisterVM registerVm)
+        {
+            var insert = accountRepository.Register(registerVm);
+            if (insert == 2)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = insert, message = "Success" });
+            }
+            else if (insert == 1)
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = insert, message = "Email tidak boleh sama" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = insert, message = "NIK tidak boleh sama" });
             }
         }
     }

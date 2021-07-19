@@ -4,8 +4,6 @@
 }
 @using Microsoft.AspNetCore.Http
 
-
-
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -13,12 +11,15 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Employees</h1>
+                    <div class="col-md-2">
+                        <h1>Employees</h1>                        
                     </div>
-
                 </div>
-
+                <div class="row mb-2">
+                    <div class="col-md-2">                      
+                        <button type="submit" class="btn btn-primary btn-block mb-2" data-toggle="modal" data-target="#myModal">Add Employee</button>
+                    </div>
+                </div>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
@@ -33,10 +34,11 @@
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>USername</th>
+                                                <th>Username</th>
                                                 <th>Gender</th>
                                                 <th>Site</th>
                                                 <th>Role</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="contents">
@@ -59,50 +61,78 @@
             <!-- /.container-fluid -->
         </section>
 
-
-        <!--<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-purple">
+        <div class="modal fade " tabindex="-1" role="dialog" id="myModal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Registrasi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <!-- /.card-header -->
-        <!--<div class="card-body">
-    <table id="contents" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Creator</th>-->
-        @*<th>Action</th>*@
-        @*</tr>
-            </thead>
-            <tbody id="contents">
-            </tbody>
-            </table>
-        </div>-->*@
-        <!-- /.card-body -->
-        <!--</div>
+                    <div class="modal-body " id="add" center>
+                        <form class="need-validation" novalidate>
+                            <div class="form-group">
+                                <label for="employeeId">Employee ID</label>
+                                <input type="text" class="form-control" id="employeeId" placeholder="Employee ID" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" class="form-control" name="Full Name" id="fullName" placeholder="Full Name" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Username" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" minlength="8" placeholder="Password" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select class="form-control" id="gender">
+                                            <option value="1">Pria</option>
+                                            <option value="2">Wanita</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="phoneNumber">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="siteName">Site</label>
+                                    <select class="form-control" id="siteName">
+                                        <option value="1">MII</option>
+                                    </select>
+                                </div>
+                            </div>
 
-    </div>-->
-        <!-- /.col -->
-        <!--</div>-->
-        <!-- /.row -->
-        <!--</div>-->
-        <!-- /.container-fluid -->
-        <!--</section>-->
-        <!-- /.card -->
-        @*</div>*@
+                            <button type="button" class="btn btn-primary" onclick="Insert()">Register</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
-                <!-- /.col -->
-            <!--</div>-->
-            <!-- /.row -->
-        <!--</section>-->
-        <!-- /.content -->
-    <!--</div>-->
-    <!-- /.content-wrapper -->
+        
 </body>
 
 

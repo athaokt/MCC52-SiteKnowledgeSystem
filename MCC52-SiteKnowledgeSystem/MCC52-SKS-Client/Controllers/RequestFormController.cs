@@ -1,4 +1,5 @@
 ﻿using MCC52_SKS_Client.Models;
+using MCC52_SKS_Client.Repository.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,11 +12,11 @@ namespace MCC52_SKS_Client.Controllers
 {
     public class RequestFormController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly RequestFormRepository repository;
 
-        public RequestFormController(ILogger<HomeController> logger)
+        public RequestFormController(RequestFormRepository repository)
         {
-            _logger = logger;
+            this.repository = repository;
         }
 
         public IActionResult Index()
@@ -26,6 +27,13 @@ namespace MCC52_SKS_Client.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [HttpGet("requestform/viewrequest")]
+        public async Task<JsonResult> ViewRequest()
+        {
+            var result = await repository.ViewRequest();
+            return Json(result);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

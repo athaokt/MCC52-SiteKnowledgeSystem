@@ -28,7 +28,11 @@ namespace MCC52_SKS_Client.Controllers
             var result = await repository.ViewRegistered();
             return Json(result);
         }
-
+        public async Task<JsonResult> Register()
+        {
+            var result = await repository.Register();
+            return Json(result);
+        }
         public async Task<JsonResult> ViewDetail(string employeeId)
         {
             var result = await repository.ViewDetail(employeeId);

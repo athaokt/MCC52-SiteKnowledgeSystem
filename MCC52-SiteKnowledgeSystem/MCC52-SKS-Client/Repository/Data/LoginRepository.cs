@@ -53,12 +53,20 @@ namespace MCC52_SKS_Client.Repository.Data
             JwtSecurityToken result = tokenHandler.ReadJwtToken(token);
 
             return result.Claims.FirstOrDefault(claim => claim.Type.Equals("fullName")).Value;
-        }public string JwtRole(string token)
+        }
+        public string JwtRole(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken result = tokenHandler.ReadJwtToken(token);
 
             return result.Claims.FirstOrDefault(claim => claim.Type.Equals("role")).Value;
+        }
+        public string JwtEmployeeId(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken result = tokenHandler.ReadJwtToken(token);
+
+            return result.Claims.FirstOrDefault(claim => claim.Type.Equals("employeeId")).Value;
         }
     }
 }

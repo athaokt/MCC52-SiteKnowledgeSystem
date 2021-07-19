@@ -39,6 +39,17 @@ namespace MCC52_SKS_Client.Repository.Data
                 entities = JsonConvert.DeserializeObject<List<RegisterVM>>(apiResponse);
             }
             return entities;
+        } 
+        public async Task<List<RegisterVM>> Register()
+        {
+            List<RegisterVM> entities = new List<RegisterVM>();
+
+            using (var response = await httpClient.GetAsync(request + "register/"))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<RegisterVM>>(apiResponse);
+            }
+            return entities;
         }
         public async Task<List<RegisterVM>> ViewDetail(string employeeId)
         {
