@@ -53,8 +53,8 @@
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
+    confirmButton: 'btn btn-danger',
+    cancelButton: 'btn btn-primary'
   },
   buttonsStyling: false
 })
@@ -78,9 +78,9 @@ $(document).on("click", ".hapus", function () {
                 swalWithBootstrapButtons.fire(
                     'Berhasil terhapus!',
                     'Data sudah dihapus',
-                    'success'
+                    'success',
                 )
-                window.open("employee")
+                $('#table').DataTable().ajax.reload()                
             })
         }
     })

@@ -12,7 +12,7 @@ namespace MCC52_SiteKnowledgeSystem.Bases
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[EnableCors("AllowOrigin")]
+    [EnableCors("AllowOrigin")]
     public class BaseController<Entity, Repository, Key> : ControllerBase
         where Entity : class
         where Repository : IGeneralRepository<Entity, Key>

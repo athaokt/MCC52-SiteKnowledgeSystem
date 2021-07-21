@@ -29,7 +29,18 @@ namespace MCC52_SKS_Client.Repository.Data
                 BaseAddress = new Uri(address.link)
             };
         }
+/*
+        public async Task<List<Content>> GetContents()
+        {
+            List<Content> entities = new List<Content>();
 
+            using (var response = await httpClient.GetAsync(request))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<Content>>(apiResponse);
+            }
+            return entities;
+        }*/
 
         public async Task<List<GetContentVM>> ViewContent()
         {

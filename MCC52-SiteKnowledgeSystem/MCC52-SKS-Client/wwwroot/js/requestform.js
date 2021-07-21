@@ -25,14 +25,19 @@ function Insert() {
     let obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
     //ini ngambil value dari tiap inputan di form nya
     //
-    obj.Message = $("#message").val();
+    /*obj.Message = $("#message").val();
     obj.RequestDate = newdate;
     obj.EmployeeId = `@Context.Session.GetString("employeeId")`;
+    const myJSON = JSON.stringify(obj);*/
+    
+    obj.Message = "tes";
+    obj.RequestDate = "2021-12-12";
+    obj.EmployeeId = "as";
     const myJSON = JSON.stringify(obj);
 
     //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
     $.ajax({
-        url: "https://localhost:44365/API/RequestForms/",
+        url: "https://localhost:44365/API/RequestForms",
         type: "POST",
         contentType: "application/json",
         data: myJSON
