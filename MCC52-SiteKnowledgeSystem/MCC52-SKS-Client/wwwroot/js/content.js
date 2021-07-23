@@ -39,7 +39,7 @@
                 width: '75px',
                 render: function (data, type, full, meta) {
                     var btn = "";
-                    btn += '<a href="content/' + data + '" class="btn btn-sm btn-clean btn-icon" data-id="' + data + '"><i class="nav-icon fas fa-tachometer-alt"></i></a>';
+                    btn += '<a href="content/detail/?contentId=' + data + '" class="btn btn-sm btn-clean btn-icon" data-id="' + data + '"><i class="nav-icon fas fa-tachometer-alt"></i></a>';
                     
                     return (
                         btn
@@ -50,60 +50,44 @@
     });
 });
 
-$(document).on("click", ".open", function () {
-    var nik = $(this).data('id');
-    $.ajax({
-        url: "/content/viewcontent/" + nik
-    }).done((result) => {
-        //console.log(result);
-        text = "";
-        no = 1;
-        $.each(result, function (key, val) {
-            $("#judulD").html("Detail " + val.firstName + " " + val.lastName);
-            $("#nikD").html(val.nik);
-            $("#nameD").html(val.firstName + " " + val.lastName);
-            $("#emailD").html(val.email);
-            $("#salaryD").html(formatRupiah('' + val.salary, ''));
-            $("#phoneD").html(formatTelfon(val.phoneNumber, ""));
-            $("#dateD").html(val.birthDate);
-            $("#genderD").html((val.gender == 0) ? "Laki-Laki" : "Perempuan");
-            $("#roleD").html(val.roleName);
-            $("#degreeD").html(val.degree);
-            $("#gpaD").html(val.gpa);
-            $("#title").html(val.contentTitle);
-        })
-    }).fail((error) => {
-        console.log(error);
-    });
-})
 
-function Insert() {
-    let obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
-    //ini ngambil value dari tiap inputan di form nya
-    obj.EmployeeId = $("#employeeId").val();
-    obj.FullName = $("#fullName").val();
-    obj.Username = $("#username").val();
-    obj.Email = $("#email").val();
-    obj.Password = $("#password").val();
-    obj.PhoneNumber = $("#phoneNumber").val();
-    obj.Gender = parseInt($("#gender").val());
-    obj.SiteId = parseInt($("#siteName").val());
-    const myJSON = JSON.stringify(obj);
+function InsertContent() {
 
-    //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
+    let obj = new Object();
+    var waktu = new Date();
+    obj.ContentTitle = $('#title').val();
+    obj.ContentText = $('#message').val();
+    obj.ContenttDate = formatDate(waktu);
+    obj.ViewCounter = 0;
+    obj.CategoryId = parseInt($('#category').val());
+
     $.ajax({
-        url: "https://localhost:44365/api/employees/register",
-        type: "POST",
-        contentType: "application/json",
-        data: myJSON
+        url: "https://localhost:44393/content/insertcontent",
+        type: "post",
+        data: obj,
     }).done((result) => {
         Swal.fire(
             'Data berhasil Ditambah!',
             'success'
         )
-        window.location = "employee";
+        $('#contents').DataTable().ajax.reload()
     }).fail((error) => {
         //alert pemberitahuan jika gagal
-        alert("Gagal menambah data");;
+        console.log(error);
+        //alert("Gagal menambah data");;
     })
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
 }

@@ -25,8 +25,7 @@ namespace MCC52_SiteKnowledgeSystem.Model
         public string ContentText { get; set; }
         //public DateTime? ContentDate { get; set; }
         
-        public DateTime ContentDate { get; set; }
-        
+        public DateTime ContentDate { get; set; }        
         public int ViewCounter { get; set; }
         public string EmployeeId { get; set; }
         public int CategoryId { get; set; }

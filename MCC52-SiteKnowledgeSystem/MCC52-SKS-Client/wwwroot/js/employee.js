@@ -80,7 +80,7 @@ $(document).on("click", ".hapus", function () {
                     'Data sudah dihapus',
                     'success',
                 )
-                $('#table').DataTable().ajax.reload()                
+                $('#contents').DataTable().ajax.reload()                
             })
         }
     })
@@ -110,7 +110,7 @@ function Insert() {
             'Data berhasil Ditambah!',
             'success'
         )
-        window.location = "employee";
+        $('#contents').DataTable().ajax.reload()
     }).fail((error) => {
         //alert pemberitahuan jika gagal
         alert("Gagal menambah data");;

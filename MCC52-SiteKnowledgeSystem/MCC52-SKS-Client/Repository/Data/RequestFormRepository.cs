@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using MCC52_SiteKnowledgeSystem.Model;
 using MCC52_SKS_Client.ViewModel;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace MCC52_SKS_Client.Repository.Data
 {
@@ -39,6 +41,25 @@ namespace MCC52_SKS_Client.Repository.Data
                 entities = JsonConvert.DeserializeObject<List<RequestForm>>(apiResponse);
             }
             return entities;
+        }
+        public string JwtEmployeeId(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken result = tokenHandler.ReadJwtToken(token);
+
+            return result.Claims.FirstOrDefault(claim => claim.Type.Equals("employeeId")).Value;
+        }
+
+        public async Task<string> InsertRequest(RequestForm requestform)
+        {
+            var apiResponse = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(requestform), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync(request, content);
+            if (result.IsSuccessStatusCode)
+            {
+                apiResponse = await result.Content.ReadAsStringAsync();
+            }
+            return apiResponse;
         }
     }
 }

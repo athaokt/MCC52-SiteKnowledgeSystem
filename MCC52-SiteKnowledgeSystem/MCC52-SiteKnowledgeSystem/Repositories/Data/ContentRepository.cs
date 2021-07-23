@@ -25,6 +25,7 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
                                       c.ContentId,
                                       ca.CategoryName,
                                       c.ContentTitle,
+                                      c.ContentText,
                                       e.FullName,
                                       c.ContentDate
                                   });
@@ -42,6 +43,7 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
                                       c.ContentId,
                                       ca.CategoryName,
                                       c.ContentTitle,
+                                      c.ContentText,
                                       e.FullName,
                                       c.ContentDate
                                   });

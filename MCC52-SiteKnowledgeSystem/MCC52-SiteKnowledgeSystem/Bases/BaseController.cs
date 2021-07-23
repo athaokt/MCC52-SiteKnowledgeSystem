@@ -37,11 +37,11 @@ namespace MCC52_SiteKnowledgeSystem.Bases
             var response = repository.Get(key);
             if (key == null)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = response, message = "Tidak ditemukan" });
+                return BadRequest(response);
             }
             else
             {
-                return Ok(new { status = HttpStatusCode.OK, result = response, message = "Data ditemukan" });
+                return Ok(response);
             }
         }
 

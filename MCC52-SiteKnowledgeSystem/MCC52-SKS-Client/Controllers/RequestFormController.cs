@@ -1,5 +1,7 @@
-﻿using MCC52_SKS_Client.Models;
+﻿using MCC52_SiteKnowledgeSystem.Model;
+using MCC52_SKS_Client.Models;
 using MCC52_SKS_Client.Repository.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -40,6 +42,12 @@ namespace MCC52_SKS_Client.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public async Task<string> InsertRequest(RequestForm requestForm)
+        {
+            requestForm.EmployeeId = HttpContext.Session.GetString("employeeId");
+            var result = await repository.InsertRequest(requestForm);
+            return result;
         }
     }
 }
