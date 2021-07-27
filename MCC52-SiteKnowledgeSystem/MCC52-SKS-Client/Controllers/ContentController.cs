@@ -39,7 +39,7 @@ namespace MCC52_SKS_Client.Controllers
         }
         public async Task<IActionResult> Detail(int contentId)
         {
-            GetContentVM result = await repository.ViewDetail(contentId);
+            List<GetContentVM> result =  await repository.ViewDetail(contentId);
             
             return View(result);
         }

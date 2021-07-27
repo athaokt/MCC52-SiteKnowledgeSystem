@@ -11,7 +11,6 @@
             {
                 "data": "categoryName"
             },
-
             {
                 data: "contentTitle",
                 render: function (data, type, row, meta) {
@@ -27,7 +26,6 @@
             {
                 "data": "contentId"
             }
-
         ],
         columnDefs: [
             
@@ -49,7 +47,6 @@
         ]
     });
 });
-
 
 function InsertContent() {
 

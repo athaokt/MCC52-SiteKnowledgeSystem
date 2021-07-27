@@ -1,10 +1,10 @@
-﻿@using MCC52_SiteKnowledgeSystem.Model;
-@using MCC52_SKS_Client.ViewModel;
+﻿@using MCC52_SKS_Client.ViewModel;
 
 
-@model MCC52_SKS_Client.ViewModel.GetContentVM;
+@model List<MCC52_SKS_Client.ViewModel.GetContentVM>
 @{
-    ViewData["Title"] = Model.ContentTitle;
+    ViewData["Title"] = Model[0].ContentTitle;
+    Layout = "_Admin";
 }
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -29,7 +29,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header p-2">
-                                <h2>@Model.ContentTitle</h2>
+                                <h3>@Model[0].ContentTitle</h3>
                             </div><!-- /.card-header -->
                             <div class="card-body">
                                 <div class="tab-content">
@@ -39,13 +39,16 @@
                                             <div class="user-block">
                                                 <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
                                                 <span class="username">
-                                                    <a href="#">@Model.FullName</a>
+                                                    <a href="#">@Model[0].FullName</a>
                                                 </span>
-                                                <span class="description">@Model.ContentDate</span>
+                                                <span class="username">
+                                                    @Model[0].ContentDate
+                                                </span>
+                                                <span class="description"></span>
                                             </div>
                                             <!-- /.user-block -->
                                             <p>
-                                                @Model.ContentText
+                                                @Model[0].ContentText
                                             </p>
 
                                             <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
@@ -67,7 +70,6 @@
         </section>
         <!-- /.content -->
     </div>
-
 </body>
 
 

@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using MCC52_SiteKnowledgeSystem.Model;
 using MCC52_SKS_Client.ViewModel;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MCC52_SKS_Client.Repository.Data
 {
@@ -29,18 +31,6 @@ namespace MCC52_SKS_Client.Repository.Data
                 BaseAddress = new Uri(address.link)
             };
         }
-/*
-        public async Task<List<Content>> GetContents()
-        {
-            List<Content> entities = new List<Content>();
-
-            using (var response = await httpClient.GetAsync(request))
-            {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                entities = JsonConvert.DeserializeObject<List<Content>>(apiResponse);
-            }
-            return entities;
-        }*/
 
         public async Task<List<GetContentVM>> ViewContent()
         {
@@ -53,8 +43,7 @@ namespace MCC52_SKS_Client.Repository.Data
             }
             return entities;
         }
-
-        public async Task<List<GetContentVM>> ViewContent(int contentId)
+        public async Task<List<GetContentVM>> ViewDetail(int contentId)
         {
             List<GetContentVM> entities = new List<GetContentVM>();
 
@@ -65,17 +54,23 @@ namespace MCC52_SKS_Client.Repository.Data
             }
             return entities;
         }
-        public async Task<List<Content>> ViewDetail(int contentId)
+        public string JwtEmployeeId(string token)
         {
-            List<Content> entities = new List<Content>();
+            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken result = tokenHandler.ReadJwtToken(token);
 
-            using (var response = await httpClient.GetAsync(request + "GetAllData/" + contentId))
-            {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                entities = JsonConvert.DeserializeObject<List<Content>>(apiResponse);
-            }
-            return entities;
+            return result.Claims.FirstOrDefault(claim => claim.Type.Equals("employeeId")).Value;
         }
-
+        public async Task<string> InsertContent(Content content)
+        {
+            var apiResponse = "";
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync(request, stringContent);
+            if (result.IsSuccessStatusCode)
+            {
+                apiResponse = await result.Content.ReadAsStringAsync();
+            }
+            return apiResponse;
+        }
     }
 }
