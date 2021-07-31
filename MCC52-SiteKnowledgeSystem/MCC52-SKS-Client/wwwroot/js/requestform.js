@@ -21,24 +21,25 @@ function InsertForm() {
     let tanggal = new Date().toLocaleString();
     let obj = new Object();
     var waktu = new Date();
-    obj.Message = $('#message').val();
+    obj.Message = $('#requestMessage').val();
     obj.RequestDate = formatDate(waktu);
-
     $.ajax({
         url: "https://localhost:44393/requestform/InsertRequest",
         type: "post",
         data: obj,
     }).done((result) => {
         Swal.fire({
-            title: 'Data berhasil Ditambah!',
-            text: 'success'
+            title: 'Berhasil Request Content',
+            text: 'Request diajukan ke Admin'
         }).then( function () {
             location.reload();
         })
     }).fail((error) => {
-        //alert pemberitahuan jika gagal
-        console.log(error);
-        //alert("Gagal menambah data");;
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: 'Data gagal ditambah'
+        })
     })
 }
 

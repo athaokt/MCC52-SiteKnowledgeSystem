@@ -12,13 +12,14 @@
                 "data": "categoryName"
             },
             {
-                data: "contentTitle",
-                render: function (data, type, row, meta) {
-                    return data = '<a href="">' + data + '</a>';
-                }
+                data: "contentTitle"
             },
             {
-                "data": "contentDate"
+                data: "contentDate",
+                render: function (data, type, row, meta) {
+                    tanggal = new Date(data).toLocaleDateString();
+                    return tanggal;
+                }
             },                        
             {
                 "data": "fullName"
@@ -37,7 +38,7 @@
                 width: '75px',
                 render: function (data, type, full, meta) {
                     var btn = "";
-                    btn += '<a href="content/detail/?contentId=' + data + '" class="btn btn-sm btn-clean btn-icon" data-id="' + data + '"><i class="nav-icon fas fa-tachometer-alt"></i></a>';
+                    btn += '<a href="content/detail/?contentId=' + data + '" class="btn btn-outline-primary btn-sm btn-clean btn-icon" data-id="' + data + '">Open</a>';
                     
                     return (
                         btn
@@ -51,10 +52,17 @@
 function InsertContent() {
 
     let obj = new Object();
-    var waktu = new Date();
+    let today = new Date();
+
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    let yyyy = today.getFullYear();
+
+    let date = yyyy +"-"+ mm +"-"+ dd;
+
     obj.ContentTitle = $('#title').val();
     obj.ContentText = $('#message').val();
-    obj.ContenttDate = formatDate(waktu);
+    obj.ContentDate = date;
     obj.ViewCounter = 0;
     obj.CategoryId = parseInt($('#category').val());
 
@@ -64,14 +72,16 @@ function InsertContent() {
         data: obj,
     }).done((result) => {
         Swal.fire(
-            'Data berhasil Ditambah!',
-            'success'
+            'Berhasil menambah konten',
+            'Konten sudah di publish'
         )
         $('#contents').DataTable().ajax.reload()
     }).fail((error) => {
-        //alert pemberitahuan jika gagal
-        console.log(error);
-        //alert("Gagal menambah data");;
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: 'Data gagal ditambah'
+        })
     })
 }
 

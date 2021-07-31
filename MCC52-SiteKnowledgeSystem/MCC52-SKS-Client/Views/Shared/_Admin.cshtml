@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -65,40 +65,51 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-                    with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="/dashboard" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Dashboard
-                            </p>
-                        </a>
-
-                    </li>
-                    <li class="nav-item">
-                        <a href="/content" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Contents
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/requestform" class="nav-link">
-                            <i class="nav-icon fas fa-edit"></i>
-                            <p>
-                                Request Form
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/employee" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>
-                                Employees
-                            </p>
-                        </a>
-                    </li>
+    with font-awesome or any other icon font library -->
+                    @if (User.IsInRole("Admin") || User.IsInRole("Creator") || User.IsInRole("Employee"))
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Dashboard")" class="nav-link">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <p>
+                                     Dashboard
+                                </p>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Creator") || User.IsInRole("Employee"))
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Content")" class="nav-link">
+                                <i class="fas fa-copy"></i>
+                                <p>
+                                     Content
+                                </p>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Creator"))
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "RequestForm")" class="nav-link">
+                                <i class="fas fa-edit"></i>
+                                <p>
+                                     Request
+                                </p>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Employee")" class="nav-link">
+                                <i class="fas fa-table"></i>
+                                <p>
+                                     Employee
+                                </p>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

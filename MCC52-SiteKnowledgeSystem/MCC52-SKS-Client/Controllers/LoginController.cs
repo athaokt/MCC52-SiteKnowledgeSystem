@@ -36,22 +36,7 @@ namespace MCC52_SKS_Client.Controllers
             HttpContext.Session.SetString("role", repository.JwtRole(jwToken.Token));
             HttpContext.Session.SetString("employeeId", repository.JwtEmployeeId(jwToken.Token));
 
-            var role = HttpContext.Session.GetString("role");
-            if (role == "Admin")
-            {
-                return RedirectToAction("index", "dashboard");
-            }
-
-            else if (role == "Creator")
-            {
-                return RedirectToAction("index", "dashboardcreator");
-            }
-
-            else
-            {
-                return RedirectToAction("index", "dashboardemployee");
-            }
-            
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }

@@ -5,19 +5,19 @@
     text = "";
 
     $.each(result, function (key, val) {
+        tanggal = new Date(val.contentDate).toLocaleDateString();
         text += `<div class="post">
                                             <div class="user-block">
                                                 <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                                                <span class="username">${val.contentTitle}</span>
-                                                <span class="description">${val.contentDate}</span>
+                                                <span class="username">
+                                                <a href="content/detail/?contentId=${val.contentId}">${val.contentTitle}</a></span>
+                                                <span class="description float-right">${tanggal}</span>
                                                 <span class="description">${val.fullName}</span>
                                             </div>
                                             <!-- /.user-block -->
                                             <p>
                                                 ${val.contentText}
                                             </p>
-
-                                            <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
                                         </div>`;
     });
     console.log(result);
