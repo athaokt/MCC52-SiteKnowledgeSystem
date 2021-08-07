@@ -23,7 +23,7 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
             this._configuration = config;
             this.myContext = myContext;
         }
-        public IQueryable GetAll()
+        public IQueryable GetAllData()
         {
             var employeeRecord = (from e in myContext.Employees
                                   join s in myContext.Sites on e.SiteId equals s.SiteId
@@ -44,7 +44,7 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
             return employeeRecord;
         }
 
-        public IQueryable GetAll(string employeeId)
+        public IQueryable GetAllData(string employeeId)
         {
 
 
@@ -175,14 +175,19 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
                 where account.Username == $"{loginVM.Username}" || employee.Email == $"{loginVM.Email}"
                 select new
                 {
+                    EmployeeId = employee.EmployeeId,
+                    FullName = employee.FullName,
                     Email = employee.Email,
                     RoleName = role.RoleName
                 }).ToList();
             var claims = new List<Claim>();
             foreach (var item in data)
             {
+                claims.Add(new Claim("employeeId", item.EmployeeId));
+                claims.Add(new Claim("fullName", item.FullName));
                 claims.Add(new Claim("email", item.Email));
                 claims.Add(new Claim("role", item.RoleName));
+
             }
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -192,10 +197,89 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
             //return Ok(new { status = HttpStatusCode.OK, nik = user.NIK, token = show });
         }
 
+        public List<string> GetDataLogin(LoginVM loginVM)
+        {
+            List<string> data = new List<string>();
+            var getInfo = (from e in myContext.Employees
+                           join s in myContext.Sites on e.SiteId equals s.SiteId
+                           join a in myContext.Accounts on e.EmployeeId equals a.EmployeeId
+                           join ar in myContext.AccountRoles on a.EmployeeId equals ar.EmployeeId
+                           join r in myContext.Roles on ar.RoleId equals r.RoleId
+                           select new
+                           {
+                               EmployeeId = e.EmployeeId,
+                               FullName = e.FullName,
+                               Email = e.Email,
+                               Username = a.Username,
+                               PhoneNumber = e.PhoneNumber,
+                               SiteName = s.SiteName,
+                               RoleName = r.RoleName
+                           });
+            foreach (var item in getInfo)
+            {
+                data.Add(item.EmployeeId);
+                data.Add(item.FullName);
+                data.Add(item.Email);
+                data.Add(item.Username);
+                data.Add(item.PhoneNumber);
+                data.Add(item.SiteName);
+                data.Add(item.RoleName);
+            } 
+            return data;
+        }
+
+        public int Register(RegisterVM registerVM)
+        {
+            Employee employee = new Employee();
+            Account account = new Account();
+            AccountRole accountRole = new AccountRole();
+            var cekNik = myContext.Employees.Find(registerVM.EmployeeId);
+            if (cekNik == null)
+            {
+                var cekEmail = myContext.Employees.Where(e => e.Email == registerVM.Email).FirstOrDefault<Employee>();
+                if (cekEmail == null)
+                {
+                    /*var getRandomSalt = BCrypt.Net.BCrypt.GenerateSalt(12);*/
+
+                    employee.EmployeeId = registerVM.EmployeeId;
+                    employee.FullName = registerVM.FullName;
+                    employee.PhoneNumber = registerVM.PhoneNumber;
+
+                    employee.Gender = (Employee.GenderType)registerVM.Gender;
+                    employee.Email = registerVM.Email;
+                    employee.SiteId = registerVM.SiteId;
+                    myContext.Employees.Add(employee);
+                    myContext.SaveChanges();
+
+                    var password = BCrypt.Net.BCrypt.HashPassword(registerVM.Password, GetRandomSalt());
+
+                    account.EmployeeId = employee.EmployeeId;
+                    account.Username = registerVM.Username;
+                    account.Password = password;
+                    myContext.Accounts.Add(account);
+                    myContext.SaveChanges();
+
+                    accountRole.RoleId = 3;
+                    accountRole.EmployeeId = registerVM.EmployeeId;
+                    myContext.AccountRoles.Add(accountRole);
+                    myContext.SaveChanges();
+
+                    myContext.SaveChanges();
+
+                    return 2;
+                }
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public static string GetRandomSalt()
         {
             return BCrypt.Net.BCrypt.GenerateSalt(12);
         }
-
     }
+
 }

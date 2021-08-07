@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Request";
+    Layout = "_Admin";
+}
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" width="100%">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Request</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-danger btn-block mb-2" data-toggle="modal" data-target="#modal-danger">Forward</button>
+        </div>
+
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-bullhorn"></i>
+                                    Request List
+                                </h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body" id="request">
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+            </div>
+        </section>
+
+        
+
+        <div class="modal fade" id="modal-danger">
+            <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Request Form</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="message" placeholder="Text"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-light" onclick="InsertForm()">Ok</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <!-- Main content -->
+        <!-- /.content -->
+
+    </div>
+    <!-- /.content-wrapper -->
+</body>
+
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/requestform.js"></script>
+}

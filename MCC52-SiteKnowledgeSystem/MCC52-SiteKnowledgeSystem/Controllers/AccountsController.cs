@@ -4,6 +4,7 @@ using MCC52_SiteKnowledgeSystem.Model;
 using MCC52_SiteKnowledgeSystem.Repositories.Data;
 using MCC52_SiteKnowledgeSystem.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,9 +15,10 @@ using System.Threading.Tasks;
 
 namespace MCC52_SiteKnowledgeSystem.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     public class AccountsController : BaseController<Account, AccountRepository, string>
     {
         
@@ -28,9 +30,23 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
             this.myContext = myContext;
         }
         [HttpGet("GetAllData")]
-        public ActionResult GetAll()
+        public ActionResult GetAllData()
         {
-            var get = accountRepository.GetAll();
+            var get = accountRepository.GetAllData();
+
+            if (get != null)
+            {
+                return Ok(get);
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = get, message = "Failed" });
+            }
+        }
+        [HttpGet("GetAllData/{employeeId}")]
+        public ActionResult GetAllData(string employeeId)
+        {
+            var get = accountRepository.GetAllData(employeeId);
 
             if (get != null)
             {
@@ -88,6 +104,23 @@ namespace MCC52_SiteKnowledgeSystem.Controllers
             else
             {
                 return BadRequest(new { status = HttpStatusCode.OK, result = reset, message = "Gagal Ganti Password" });
+            }
+        }
+        [HttpPost("Register")]
+        public ActionResult Register(RegisterVM registerVm)
+        {
+            var insert = accountRepository.Register(registerVm);
+            if (insert == 2)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = insert, message = "Success" });
+            }
+            else if (insert == 1)
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = insert, message = "Email tidak boleh sama" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = insert, message = "NIK tidak boleh sama" });
             }
         }
     }

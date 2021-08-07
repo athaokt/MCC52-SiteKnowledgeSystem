@@ -12,23 +12,12 @@ namespace MCC52_SiteKnowledgeSystem.Model
     public class Message
     {
 
-
         private DateTime? messageDate = System.DateTime.Now;
 
         [Key]
         public int MessageId { get; set; }
         public string MessageText { get; set; }
-        public DateTime MessageDate
-        {
-            get
-            {
-                return this.messageDate.HasValue
-                   ? this.messageDate.Value
-                   : DateTime.Now;
-            }
-
-            set { this.messageDate = value; }
-        }
+        public DateTime MessageDate { get; set; }
         public string EmployeeId { get; set; }
         public int ContentId { get; set; }
 

@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Content";
+    Layout = "_Admin";
+}
+@using Microsoft.AspNetCore.Http
+
+
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Contents</h1>
+                        <h1 id="demo"> </h1>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    @if (User.IsInRole("Creator"))
+                    {
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-success btn-block mb-2" data-toggle="modal" data-target="#modal-success">Add Content</button>
+                        </div>
+                    }
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-secondary btn-block mb-2" data-toggle="modal" data-target="#modal-danger">Request Content</button>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-purple">
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="contents" class="table table-bordered table-hover" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Title</th>
+                                                <th>Date</th>
+                                                <th>Creator</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="contents">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <div class="modal fade" id="modal-success">
+            <div class="modal-dialog">
+                <div class="modal-content bg-success">
+                    <div class="modal-header">
+                        <h4 class="modal-title">New Content</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="title" class="col-form-label">Title:</label>
+                                <input type="text" class="form-control" id="title" placeholder="Title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="text" class="col-form-label">Content:</label>
+                                <textarea class="form-control" id="message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <select class="form-control" id="category">
+                                        <option value="2">Web Programming</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-light" onclick="InsertContent()">Ok</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade" id="modal-danger">
+            <div class="modal-dialog">
+                <div class="modal-content bg-secondary">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Request Form</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="requestMessage" placeholder="Text"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-light" onclick="InsertForm()">Ok</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</body>
+
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/content.js"></script>
+    <script type="text/javascript" src="~/js/requestform.js"></script>
+}

@@ -2,6 +2,8 @@
 using MCC52_SiteKnowledgeSystem.Model;
 using MCC52_SiteKnowledgeSystem.Repositories.Data;
 using MCC52_SiteKnowledgeSystem.ViewModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,9 +13,11 @@ using System.Net;
 using System.Threading.Tasks;
 
 namespace MCC52_SiteKnowledgeSystem.Controllers
-{
+{/*
+    [Authorize]*/
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     public class EmployeesController : BaseController<Employee, EmployeeRepository, string>
     {
         private EmployeeRepository employeeRepository;

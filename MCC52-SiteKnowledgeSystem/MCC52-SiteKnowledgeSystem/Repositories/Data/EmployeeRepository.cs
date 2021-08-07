@@ -31,8 +31,7 @@ namespace MCC52_SiteKnowledgeSystem.Repositories.Data
 
                     employee.EmployeeId = registerVM.EmployeeId;
                     employee.FullName = registerVM.FullName;
-                    employee.PhoneNumber = registerVM.PhoneNumber;
-  
+                    employee.PhoneNumber = registerVM.PhoneNumber;  
                     employee.Gender = (Employee.GenderType)registerVM.Gender;
                     employee.Email = registerVM.Email;
                     employee.SiteId = registerVM.SiteId;
